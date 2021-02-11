@@ -2,16 +2,26 @@
 
 require('interfaces/UserInterface.php');
 
-class user implements UserInterface
+class User implements UserInterface
 {
 
-    private $request;
+    private array $request;
 
     public function __construct() {
         $this->getRequest($_REQUEST);
     }
 
 
+    public function getRequest($request) : User    {
+        foreach ($_REQUEST as $key => $value){
+            $request[$key] = $value;
+        }
+        return $this;
+    }
 
-
+    public function parseRequest() : void    {
+       foreach ($this->request as $key => $value){
+           echo "<p> $key : $value</p>";
+       }
+    }
 }
